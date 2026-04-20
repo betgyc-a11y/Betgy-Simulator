@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>金融财务模拟器 | Financial Simulator</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<div class="container">
+    <header class="title-section">
+        <h1>看透财务真相：<span class="highlight-gold">模拟您的未来</span></h1>
+        <p>通过数据可视化的力量，掌握收入增长与通胀的博弈。</p>
+    </header>
+
+    <!-- Simulator 1: Inflation Survival -->
+    <section class="card" id="inflation-simulator">
+        <h2 class="card-title">
+            <span class="emoji">📉</span> 生存危机与通胀模拟器
+        </h2>
+
+        <div class="survival-card">
+            <div class="inputs-section">
+                <div class="slider-group">
+                    <div class="slider-header">
+                        <label class="slider-label">当前每月固定收入</label>
+                        <span class="slider-value" id="income-val">RM 12,000</span>
+                    </div>
+                    <input type="range" id="income-slider" min="2000" max="50000" step="500" value="12000">
+                </div>
+
+                <div class="slider-group">
+                    <div class="slider-header">
+                        <label class="slider-label">每月房屋/汽车等固定开销</label>
+                        <span class="slider-value" id="fixed-exp-val">RM 2,000</span>
+                    </div>
+                    <input type="range" id="fixed-exp-slider" min="500" max="20000" step="100" value="2000">
+                </div>
+
+                <div class="slider-group">
+                    <div class="slider-header">
+                        <label class="slider-label">每月日常生活等浮动开销</label>
+                        <span class="slider-value" id="flex-exp-val">RM 2,400</span>
+                    </div>
+                    <input type="range" id="flex-exp-slider" min="500" max="15000" step="100" value="2400">
+                </div>
+
+                <div class="slider-group">
+                    <div class="slider-header">
+                        <label class="slider-label">预测未来年数</label>
+                        <span class="slider-value">第 <span id="years-val">7</span> 年</span>
+                    </div>
+                    <input type="range" id="years-slider" min="0" max="30" value="7">
+                </div>
+            </div>
+
+            <div class="output-section">
+                <div class="output-item">
+                    <div class="label">预计每月必过开销总计<br>(含每年 3% 通胀)</div>
+                    <div class="large-value"><span class="currency">RM</span> <span id="future-exp">4,952</span></div>
+                </div>
+
+                <div class="output-item success">
+                    <div class="label" id="surplus-label">第 7 年时的每月财务结余</div>
+                    <div class="large-value"><span class="currency">+ RM</span> <span id="future-surplus">7,048</span></div>
+                </div>
+
+                <p class="feedback-text" id="feedback-text">
+                    还能勉强支撑，但建议增加被动收入以对冲通胀风险。
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Simulator 2: Sales Success -->
+    <section class="card" id="sales-simulator">
+        <h2 class="card-title">
+            <span class="emoji">🔥</span> 成功销售方程式 (10:3:1)
+        </h2>
+        
+        <div class="slider-group">
+            <div class="slider-header">
+                <label class="slider-label">每个月预计成交保单数</label>
+                <span class="slider-value" id="case-value">15</span>
+            </div>
+            <input type="range" id="case-slider" min="4" max="50" value="4">
+        </div>
+
+        <div class="slider-group">
+            <div class="slider-header">
+                <label class="slider-label">每张保单年度保费</label>
+                <span class="slider-value" id="premium-val">RM 3,000</span>
+            </div>
+            <input type="range" id="premium-slider" min="3000" max="30000" step="1000" value="3000">
+        </div>
+
+        <div class="slider-group">
+            <div class="slider-header">
+                <label class="slider-label">预计累计收益佣金（年）</label>
+                <span class="slider-value">第 <span id="sales-years-val">1</span> 年</span>
+            </div>
+            <input type="range" id="sales-years-slider" min="1" max="30" value="1">
+        </div>
+
+        <p style="text-align: center; color: var(--text-muted); font-size: 0.9rem;">只需完成这个日常活动量，即可稳定达成目标！</p>
+
+        <div class="visual-grid">
+            <div class="visual-item">
+                <div class="icon">👥</div>
+                <span class="number" id="leads-num">150</span>
+                <span class="label">潜在客户</span>
+            </div>
+            <div class="arrow arrow-1">➡️</div>
+            <div class="visual-item">
+                <div class="icon">🤝</div>
+                <span class="number" id="meetings-num">45</span>
+                <span class="label">面谈次数</span>
+            </div>
+            <div class="arrow arrow-2">➡️</div>
+            <div class="visual-item" style="border-style: solid; border-color: var(--accent-gold);">
+                <div class="icon">✍️</div>
+                <span class="number" id="closed-num" style="color: var(--accent-gold);">15</span>
+                <span class="label">成功签单</span>
+            </div>
+        </div>
+
+        <div class="slider-group">
+            <div class="slider-header">
+                <label class="slider-label">花红 Bonus HPFB (%)</label>
+                <span class="slider-value" id="bonus-val">5%</span>
+            </div>
+            <input type="range" id="bonus-slider" min="0" max="6" value="0">
+        </div>
+
+        <div class="income-grid">
+            <div class="income-card" style="grid-column: span 2; margin-bottom: 20px;">
+                <span class="label">预计总年度保费 (ANP)</span>
+                <div class="amount"><span class="currency">RM</span><span id="annual-premium-total">0</span></div>
+            </div>
+            
+            <!-- Current Year Cash Flow Breakdown -->
+            <div class="income-card" style="background: #eef2ff; border-color: #c7d2fe;">
+                <span class="label" id="cur-annual-label">第 1 年预计佣金收入 (年)</span>
+                <div class="amount" style="font-size: 1.8rem; margin-bottom: 4px;"><span class="currency">RM</span><span id="cur-annual-income">0</span></div>
+                <div id="cur-annual-breakdown" style="font-size: 0.75rem; color: var(--text-muted); line-height: 1.2;"></div>
+            </div>
+            <div class="income-card" style="background: #eef2ff; border-color: #c7d2fe;">
+                <span class="label" id="cur-monthly-label">第 1 年预计月均收入 (月)</span>
+                <div class="amount" style="font-size: 1.8rem;"><span class="currency">RM</span><span id="cur-monthly-income">0</span></div>
+            </div>
+
+            <div class="income-card" style="grid-column: span 2; margin-bottom: 20px;">
+                <span class="label" id="cumulative-income-label">预计累计收益佣金</span>
+                <div class="amount"><span class="currency">RM</span><span id="y1-income">0</span></div>
+            </div>
+            <div class="income-card" style="background: linear-gradient(135deg, white, #fff7ed);">
+                <span class="label" id="cumulative-bonus-label">预计累计额外花红</span>
+                <div class="amount"><span class="currency">RM</span><span id="bonus-total">0</span></div>
+            </div>
+            <div class="income-card" style="background: linear-gradient(135deg, white, #f0fdf4); border-color: #dcfce7;">
+                <span class="label">累积退休金 (1% 复利增长)</span>
+                <div class="amount"><span class="currency">RM</span><span id="retirement-fund">0</span></div>
+            </div>
+            <div class="income-card" style="grid-column: span 2; background: linear-gradient(135deg, #4f46e5, #4338ca); color: white; border: none; box-shadow: 0 10px 20px rgba(79, 70, 229, 0.3);">
+                <span class="label" style="color: rgba(255, 255, 255, 0.9); font-weight: 700;">预计总累积收益 (佣金+花红+退休金)</span>
+                <div class="amount" style="color: white; font-size: 3rem;"><span class="currency">RM</span><span id="grand-total">0</span></div>
+            </div>
+        </div>
+
+        <footer class="disclaimer">
+            * 佣金比例：Y1(25%)、Y2(25%)、Y3(18.5%)、Y4(18.5%)、Y5(15%)、Y6(15%)。<br>
+            * 花红 Bonus HPFB：当年业绩的花红 分3 年发放（分别在第 2、3、4 年获得，根据你获得的%来计算，也要达到续保力（1st Yrs 90%，2nd Yrs 80% 要求的条件） ）。<br>
+            * 累积退休金：从第 2 年起每年存入 收取到的保费的 1%，按花红利率复利 一直到15年 （ 总14% ）。
+        </footer>
+    </section>
+</div>
+
+<script src="script.js"></script>
+</body>
+</html>
